@@ -12,7 +12,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1f1c2c, #1953bc);
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -48,9 +48,9 @@
         }
 
         .tab-btn.active {
-            background: #e21a22;
+            background: #dc2626;
             color: #fff;
-            box-shadow: 0 0 15px rgba(226, 26, 34, 0.6);
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
         }
 
         .tab-btn:hover:not(.active) {
@@ -85,10 +85,11 @@
         /* Spider-Man Themed Heart */
         .heart {
             position: relative;
-            width: 120px;
-            height: 108px;
+            width: 130px;
+            height: 118px;
             animation: pulse 1.2s infinite ease-in-out;
             margin: 0 auto 30px auto;
+            filter: drop-shadow(0 0 25px rgba(220, 38, 38, 0.7));
         }
 
         .heart::before,
@@ -96,15 +97,14 @@
             content: "";
             position: absolute;
             top: 0;
-            width: 70px;
-            height: 110px;
-            border-radius: 50px 50px 0 0;
-            background: #e21a22; /* Spider-Man Red */
-            box-shadow: 0 0 35px rgba(226, 26, 34, 0.7);
+            width: 75px;
+            height: 118px;
+            border-radius: 60px 60px 0 0;
+            background: #dc2626; /* Spider-Man Red */
         }
 
         .heart::before {
-            left: 70px;
+            left: 75px;
             transform: rotate(-45deg);
             transform-origin: 0 100%;
         }
@@ -115,27 +115,47 @@
             transform-origin: 100% 100%;
         }
 
-        /* Spider-Man Eyes Overlay */
+        /* Web Pattern Overlay */
+        .web-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 65px 35px, transparent 18px, rgba(0, 0, 0, 0.35) 19px, transparent 20px),
+                radial-gradient(circle at 65px 35px, transparent 38px, rgba(0, 0, 0, 0.35) 39px, transparent 40px),
+                linear-gradient(0deg, transparent 48%, rgba(0, 0, 0, 0.3) 49%, rgba(0, 0, 0, 0.3) 51%, transparent 52%),
+                linear-gradient(90deg, transparent 48%, rgba(0, 0, 0, 0.3) 49%, rgba(0, 0, 0, 0.3) 51%, transparent 52%);
+            border-radius: 20px;
+            mix-blend-mode: overlay;
+        }
+
+        /* Perfectly Centered & Styled Spider-Man Eyes */
         .eye {
             position: absolute;
             background: #ffffff;
-            border: 2.5px solid #000000;
-            width: 28px;
-            height: 17px;
+            border: 3px solid #000000;
             z-index: 10;
-            top: 42px;
+            top: 45px;
         }
 
         .left-eye {
-            left: 28px;
-            border-radius: 50% 50% 20% 50%;
-            transform: rotate(-18deg);
+            left: 31px;
+            width: 32px;
+            height: 20px;
+            border-radius: 70% 30% 20% 60%;
+            transform: rotate(-22deg);
         }
 
         .right-eye {
-            right: 28px;
-            border-radius: 50% 50% 50% 20%;
-            transform: rotate(18deg);
+            right: 31px;
+            width: 32px;
+            height: 20px;
+            border-radius: 30% 70% 60% 20%;
+            transform: rotate(22deg);
         }
 
         @keyframes pulse {
@@ -171,7 +191,7 @@
         .question-card h2 {
             font-size: 1.5rem;
             margin-bottom: 20px;
-            color: #ff99bb;
+            color: #fca5a5;
             text-align: center;
         }
 
@@ -199,7 +219,7 @@
         }
 
         .q-group input[type="text"]:focus {
-            border-color: #e21a22;
+            border-color: #dc2626;
         }
 
         .options-grid {
@@ -220,9 +240,9 @@
         }
 
         .option-btn:hover, .option-btn.selected {
-            background: #e21a22;
-            border-color: #e21a22;
-            box-shadow: 0 0 10px rgba(226, 26, 34, 0.5);
+            background: #dc2626;
+            border-color: #dc2626;
+            box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
         }
 
         .submit-container {
@@ -231,7 +251,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #e21a22, #1953bc);
+            background: linear-gradient(135deg, #dc2626, #1e3a8a);
             color: white;
             border: none;
             padding: 12px 30px;
@@ -239,7 +259,7 @@
             font-weight: bold;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(226, 26, 34, 0.4);
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
             transition: transform 0.2s;
         }
 
@@ -251,7 +271,7 @@
             display: none;
             text-align: center;
             font-size: 1.2rem;
-            color: #99ffbb;
+            color: #86efac;
             margin-top: 20px;
         }
 
@@ -275,9 +295,9 @@
         }
 
         .audio-toggle:hover {
-            background: #e21a22;
-            border-color: #e21a22;
-            box-shadow: 0 0 15px rgba(226, 26, 34, 0.6);
+            background: #dc2626;
+            border-color: #dc2626;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.6);
         }
     </style>
 </head>
@@ -299,6 +319,7 @@
     <div id="home" class="page active">
         <div class="home-content">
             <div class="heart">
+                <div class="web-overlay"></div>
                 <div class="eye left-eye"></div>
                 <div class="eye right-eye"></div>
             </div>
