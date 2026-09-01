@@ -226,7 +226,8 @@
             font-size: 1.05rem;
         }
 
-        .q-group input[type="text"] {
+        .q-group input[type="text"],
+        .q-group textarea {
             width: 100%;
             padding: 12px 15px;
             border-radius: 10px;
@@ -236,9 +237,11 @@
             font-size: 1rem;
             outline: none;
             transition: border-color 0.3s;
+            font-family: inherit;
         }
 
-        .q-group input[type="text"]:focus {
+        .q-group input[type="text"]:focus,
+        .q-group textarea:focus {
             border-color: #ff3366;
         }
 
@@ -347,12 +350,18 @@
 
                 <div class="q-group">
                     <label>5. What is something I don't know about you?</label>
-                    <input type="text" id="superpower" placeholder="e.g., You're tall (170), your birthday, or something...." required>
+                    <input type="text" id="superpower" placeholder="e.g., A secret fun fact..." required>
                 </div>
 
                 <div class="q-group">
                     <label>6. What do you like about me and what do you want us to do together?</label>
-                    <input type="text" id="memory" placeholder="e.g., When we laugh, our late talks, our dates..." required>
+                    <input type="text" id="memory" placeholder="e.g., When we laugh, our dates..." required>
+                </div>
+
+                <!-- Added Personal Note Box -->
+                <div class="q-group">
+                    <label>7. Write a simple note to me ✍️💕</label>
+                    <textarea id="personalNote" rows="3" placeholder="Leave a sweet little note here just for me..." required></textarea>
                 </div>
 
                 <div class="submit-container">
@@ -364,21 +373,16 @@
     </div>
 
     <script>
-        // ==========================================
-        // REPLACE WITH YOUR SUPABASE CREDENTIALS
-        // ==========================================
         const SUPABASE_URL = 'https://tcdnlolafroxgqrxgspx.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_Yovzd5GbJxjfua_XAtxyMw_siMWyU6N';
         
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Store selected options values
         let selectedValues = {
             weekend: '',
             drink: ''
         };
 
-        // Generate continuous floating hearts in the background
         function createFloatingHeart() {
             const container = document.getElementById('floatingHearts');
             if (!container) return;
@@ -403,7 +407,6 @@
 
         setInterval(createFloatingHeart, 400);
 
-        // Function to switch between tabs
         function switchPage(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
@@ -415,7 +418,6 @@
             event.currentTarget.classList.add('active');
         }
 
-        // Function for clickable option buttons
         function selectOption(button, category) {
             const group = button.parentElement;
             group.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
@@ -423,17 +425,15 @@
             selectedValues[category] = button.textContent.trim();
         }
 
-        // Handle form submission and send to Supabase
         async function handleSubmit(event) {
             event.preventDefault();
 
-            // Collect text inputs
             const comfort_food = document.getElementById('food').value;
             const dream_destination = document.getElementById('destination').value;
             const superpower = document.getElementById('superpower').value;
             const favorite_memory = document.getElementById('memory').value;
+            const personal_note = document.getElementById('personalNote').value;
 
-            // Send data to Supabase table 'love_answers'
             const { data, error } = await supabaseClient
                 .from('love_answers')
                 .insert([
@@ -443,7 +443,8 @@
                         dream_destination: dream_destination, 
                         drink_choice: selectedValues.drink, 
                         superpower: superpower, 
-                        favorite_memory: favorite_memory 
+                        favorite_memory: favorite_memory,
+                        personal_note: personal_note
                     }
                 ]);
 
